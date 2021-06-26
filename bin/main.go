@@ -1,5 +1,13 @@
 package main
 
+import (
+	"fmt"
+	"os"
+)
+
 func main() {
-	print("main")
+	if err := cliCmd.Execute(); err != nil {
+		_, _ = fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
 }
