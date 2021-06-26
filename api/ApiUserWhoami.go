@@ -2,7 +2,7 @@ package api
 
 import "encoding/json"
 import "net/http"
-import "../dt"
+import "github.com/QiYuTechDev/qiyu-notify-go/dt"
 
 type ApiUserWhoami struct {
 }

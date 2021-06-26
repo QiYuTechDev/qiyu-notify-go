@@ -4,7 +4,7 @@ import "encoding/json"
 import "net/http"
 import "bytes"
 import "io"
-import "../dt"
+import "github.com/QiYuTechDev/qiyu-notify-go/dt"
 
 type ApiEmailNotifyUniqueId struct {
 }
