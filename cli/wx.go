@@ -8,6 +8,11 @@ import (
 	"io/ioutil"
 )
 
+const (
+	typTxt = "txt"
+	typMd  = "md"
+)
+
 func init() {
 	CliCmd.AddCommand(wxCli)
 	wxCli.Flags().StringP("id", "i", "", "企业微信的 unique_id")
@@ -22,7 +27,7 @@ msg 和 file 只需要一个参数即可, 优先使用 msg`)
 }
 
 func wxNotify(uniqueId, typ, msg string) {
-	if typ == "text" {
+	if typ == typTxt {
 		notify := api.ApiWxNotifyUniqueId{}
 		_, err := notify.Post(map[string]string{"unique_id": uniqueId}, dt.NotifyArgs{Content: msg}, "")
 		if err != nil {
@@ -46,12 +51,16 @@ var wxCli = &cobra.Command{
 		if err != nil {
 			panic(err)
 		}
+		if uniqueId == "" {
+			_ = cmd.Help()
+			return
+		}
 
 		typ, err := cmd.Flags().GetString("type")
 		if err != nil {
 			panic(err)
 		}
-		if typ != "text" && typ != "md" {
+		if typ != typTxt && typ != typMd {
 			panic(fmt.Sprintf("type: %s 是无效值!", typ))
 		}
 
