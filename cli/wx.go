@@ -2,7 +2,10 @@ package cli
 
 import (
 	"fmt"
+	"github.com/QiYuTechDev/qiyu-notify-go/api"
+	"github.com/QiYuTechDev/qiyu-notify-go/dt"
 	"github.com/spf13/cobra"
+	"io/ioutil"
 )
 
 func init() {
@@ -16,6 +19,22 @@ func init() {
 msg 和 file 只需要一个参数即可, 优先使用 msg`)
 	wxCli.Flags().StringP("file", "f", "", `推送消息内容
 如果没有指定 msg 参数并且指定了 file 参数 则从此 文件中读取`)
+}
+
+func wxNotify(uniqueId, typ, msg string) {
+	if typ == "text" {
+		notify := api.ApiWxNotifyUniqueId{}
+		_, err := notify.Post(map[string]string{"unique_id": uniqueId}, dt.NotifyArgs{Content: msg}, "")
+		if err != nil {
+			panic(err)
+		}
+	} else {
+		notify := api.ApiWxMdUniqueId{}
+		_, err := notify.Post(map[string]string{"unique_id": uniqueId}, dt.NotifyArgs{Content: msg}, "")
+		if err != nil {
+			panic(err)
+		}
+	}
 }
 
 var wxCli = &cobra.Command{
@@ -46,6 +65,14 @@ var wxCli = &cobra.Command{
 			panic(err)
 		}
 
-		println("uniqueId is:", uniqueId, "\ntype is:", typ, "\nmsg is:", msg, "\nfile is:", file)
+		if msg == "" && file != "" {
+			content, err := ioutil.ReadFile(file)
+			if err != nil {
+				panic(err)
+			}
+			msg = string(content)
+		}
+
+		wxNotify(uniqueId, typ, msg)
 	},
 }
