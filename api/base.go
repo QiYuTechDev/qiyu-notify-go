@@ -1,18 +1,19 @@
 package api
 
 import (
-	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-func sendHttpRequest(r *http.Request) (io.ReadCloser, error) {
+func sendHttpRequest(r *http.Request) ([]byte, error) {
 	resp, err := http.DefaultClient.Do(r)
 	if err != nil {
 		return nil, err
 	}
-	return resp.Body, nil
+
+	return ioutil.ReadAll(resp.Body)
 }
 
 func buildUrl(baseUrl, pathUrl string, pathArgs, queryArgs map[string]string) (*url.URL, error) {
