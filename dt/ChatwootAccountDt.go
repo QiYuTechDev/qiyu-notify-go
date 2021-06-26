@@ -11,3 +11,7 @@ type ChatwootAccountDt struct {
 	 */
 	Name string `json:"name"`
 }
+
+func (api ChatwootContactDt) MyGet() {
+
+}
