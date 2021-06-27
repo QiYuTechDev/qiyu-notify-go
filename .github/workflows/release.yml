@@ -28,8 +28,13 @@ jobs:
       - name: Build Notify
         run: go build notify.go
 
-      - name: 显示文件
+      - name: Linux & macOS 显示文件
+        if: runner.os != 'Windows'
         run: ls -alh
+
+      - name: Windows 显示文件
+        if: runner.os == 'Windows'
+        run: dir .
 
       - name: 压缩文件
         run: zip ${{ matrix.os }}.zip notify
