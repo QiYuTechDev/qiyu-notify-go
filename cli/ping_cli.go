@@ -16,7 +16,7 @@ var pingCli = &cobra.Command{
 	Long:  `测试推送服务器是否可以正常工作`,
 	Run: func(cmd *cobra.Command, args []string) {
 		ping := api.ApiPing{}
-		data, err := ping.Get("")
+		data, err := ping.Get()
 		if err != nil {
 			panic(err)
 		}

@@ -9,7 +9,7 @@ type ApiUserToken struct {
 
 // Get
 // 获取一个新的Token
-func (d ApiUserToken) Get(bearer string) (*dt.UserTokenDt, error) {
+func (d ApiUserToken) Get() (*dt.UserTokenDt, error) {
 	r := new(http.Request)
 	r.Method = "GET"
 
@@ -18,10 +18,6 @@ func (d ApiUserToken) Get(bearer string) (*dt.UserTokenDt, error) {
 
 	pathArgs := map[string]string{}
 	queryArgs := map[string]string{}
-
-	if bearer != "" {
-		r.Header.Set("Authorization", "bearer "+bearer)
-	}
 
 	url, err := buildUrl(baseUrl, pathUrl, pathArgs, queryArgs)
 	if err != nil {
@@ -33,6 +29,8 @@ func (d ApiUserToken) Get(bearer string) (*dt.UserTokenDt, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	r.Header.Set("Accept", "application/json")
 
 	ret := new(dt.UserTokenDt)
 

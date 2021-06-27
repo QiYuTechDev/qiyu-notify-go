@@ -9,7 +9,7 @@ type ApiUserWhoami struct {
 
 // Get
 // 获取自己的用户名
-func (d ApiUserWhoami) Get(bearer string) (*dt.UserWhoamiDt, error) {
+func (d ApiUserWhoami) Get() (*dt.UserWhoamiDt, error) {
 	r := new(http.Request)
 	r.Method = "GET"
 
@@ -18,10 +18,6 @@ func (d ApiUserWhoami) Get(bearer string) (*dt.UserWhoamiDt, error) {
 
 	pathArgs := map[string]string{}
 	queryArgs := map[string]string{}
-
-	if bearer != "" {
-		r.Header.Set("Authorization", "bearer "+bearer)
-	}
 
 	url, err := buildUrl(baseUrl, pathUrl, pathArgs, queryArgs)
 	if err != nil {
@@ -33,6 +29,8 @@ func (d ApiUserWhoami) Get(bearer string) (*dt.UserWhoamiDt, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	r.Header.Set("Accept", "application/json")
 
 	ret := new(dt.UserWhoamiDt)
 

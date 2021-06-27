@@ -11,7 +11,7 @@ type ApiDdAppVerify struct {
 
 // Post
 // 钉钉配置验证
-func (d ApiDdAppVerify) Post(body dt.DdAppVerifyDt, bearer string) (interface{}, error) {
+func (d ApiDdAppVerify) Post(body dt.DdAppVerifyDt) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "POST"
 
@@ -21,12 +21,9 @@ func (d ApiDdAppVerify) Post(body dt.DdAppVerifyDt, bearer string) (interface{},
 	pathArgs := map[string]string{}
 	queryArgs := map[string]string{}
 
-	if bearer != "" {
-		r.Header.Set("Authorization", "bearer "+bearer)
-	}
-
 	if t, err := json.Marshal(body); err == nil {
 		r.Body = io.NopCloser(bytes.NewReader(t))
+		r.Header.Set("Content-Type", "application/json")
 	} else {
 		return nil, err
 	}

@@ -19,9 +19,7 @@ func (d ApiWxAppList) Get(bearer string) (*[]dt.WxAppInfoDt, error) {
 	pathArgs := map[string]string{}
 	queryArgs := map[string]string{}
 
-	if bearer != "" {
-		r.Header.Set("Authorization", "bearer "+bearer)
-	}
+	r.Header.Set("Authorization", "bearer "+bearer)
 
 	url, err := buildUrl(baseUrl, pathUrl, pathArgs, queryArgs)
 	if err != nil {
@@ -33,6 +31,8 @@ func (d ApiWxAppList) Get(bearer string) (*[]dt.WxAppInfoDt, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	r.Header.Set("Accept", "application/json")
 
 	ret := new([]dt.WxAppInfoDt)
 

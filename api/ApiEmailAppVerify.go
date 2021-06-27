@@ -11,7 +11,7 @@ type ApiEmailAppVerify struct {
 
 // Post
 // 验证电子邮箱
-func (d ApiEmailAppVerify) Post(body dt.EmailVerifyArgs, bearer string) (interface{}, error) {
+func (d ApiEmailAppVerify) Post(body dt.EmailVerifyArgs) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "POST"
 
@@ -21,12 +21,9 @@ func (d ApiEmailAppVerify) Post(body dt.EmailVerifyArgs, bearer string) (interfa
 	pathArgs := map[string]string{}
 	queryArgs := map[string]string{}
 
-	if bearer != "" {
-		r.Header.Set("Authorization", "bearer "+bearer)
-	}
-
 	if t, err := json.Marshal(body); err == nil {
 		r.Body = io.NopCloser(bytes.NewReader(t))
+		r.Header.Set("Content-Type", "application/json")
 	} else {
 		return nil, err
 	}

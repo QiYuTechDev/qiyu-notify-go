@@ -18,7 +18,7 @@ msg 和 file 只需要一个参数即可, 优先使用 msg`)
 
 func ddNotify(uniqueId, msg string) {
 	notify := api.ApiDdNotifyUniqueId{}
-	_, err := notify.Post(map[string]string{"unique_id": uniqueId}, dt.NotifyArgs{Content: msg}, "")
+	_, err := notify.Post(map[string]string{"unique_id": uniqueId}, dt.NotifyArgs{Content: msg})
 	if err != nil {
 		panic(err)
 	}

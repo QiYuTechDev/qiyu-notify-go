@@ -11,7 +11,7 @@ type ApiWxMdUniqueId struct {
 
 // Post
 // 发送 Markdown 通知消息到企业微信
-func (d ApiWxMdUniqueId) Post(pathArgs map[string]string, body dt.NotifyArgs, bearer string) (interface{}, error) {
+func (d ApiWxMdUniqueId) Post(pathArgs map[string]string, body dt.NotifyArgs) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "POST"
 
@@ -20,12 +20,9 @@ func (d ApiWxMdUniqueId) Post(pathArgs map[string]string, body dt.NotifyArgs, be
 
 	queryArgs := map[string]string{}
 
-	if bearer != "" {
-		r.Header.Set("Authorization", "bearer "+bearer)
-	}
-
 	if t, err := json.Marshal(body); err == nil {
 		r.Body = io.NopCloser(bytes.NewReader(t))
+		r.Header.Set("Content-Type", "application/json")
 	} else {
 		return nil, err
 	}

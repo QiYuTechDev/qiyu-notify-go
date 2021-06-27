@@ -11,7 +11,7 @@ type ApiWxChatwootUniqueId struct {
 
 // Post
 // 企业微信 Chatwoot WebHook 回调
-func (d ApiWxChatwootUniqueId) Post(pathArgs map[string]string, body dt.ChatwootWebHookDt, bearer string) (interface{}, error) {
+func (d ApiWxChatwootUniqueId) Post(pathArgs map[string]string, body dt.ChatwootWebHookDt) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "POST"
 
@@ -20,12 +20,9 @@ func (d ApiWxChatwootUniqueId) Post(pathArgs map[string]string, body dt.Chatwoot
 
 	queryArgs := map[string]string{}
 
-	if bearer != "" {
-		r.Header.Set("Authorization", "bearer "+bearer)
-	}
-
 	if t, err := json.Marshal(body); err == nil {
 		r.Body = io.NopCloser(bytes.NewReader(t))
+		r.Header.Set("Content-Type", "application/json")
 	} else {
 		return nil, err
 	}

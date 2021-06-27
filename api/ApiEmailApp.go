@@ -16,9 +16,7 @@ func (d ApiEmailApp) Put(queryArgs map[string]string, bearer string) (interface{
 
 	pathArgs := map[string]string{}
 
-	if bearer != "" {
-		r.Header.Set("Authorization", "bearer "+bearer)
-	}
+	r.Header.Set("Authorization", "bearer "+bearer)
 
 	url, err := buildUrl(baseUrl, pathUrl, pathArgs, queryArgs)
 	if err != nil {
@@ -45,9 +43,7 @@ func (d ApiEmailApp) Delete(queryArgs map[string]string, bearer string) (interfa
 
 	pathArgs := map[string]string{}
 
-	if bearer != "" {
-		r.Header.Set("Authorization", "bearer "+bearer)
-	}
+	r.Header.Set("Authorization", "bearer "+bearer)
 
 	url, err := buildUrl(baseUrl, pathUrl, pathArgs, queryArgs)
 	if err != nil {

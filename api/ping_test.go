@@ -4,7 +4,7 @@ import "testing"
 
 func Test_Ping(t *testing.T) {
 	ping := ApiPing{}
-	data, err := ping.Get("")
+	data, err := ping.Get()
 	if err != nil {
 		t.Error("ping error", err)
 	}

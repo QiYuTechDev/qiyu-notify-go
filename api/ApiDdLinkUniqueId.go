@@ -7,16 +7,12 @@ type ApiDdLinkUniqueId struct {
 
 // Get
 // 发送通知消息
-func (d ApiDdLinkUniqueId) Get(pathArgs map[string]string, queryArgs map[string]string, bearer string) (interface{}, error) {
+func (d ApiDdLinkUniqueId) Get(pathArgs map[string]string, queryArgs map[string]string) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "GET"
 
 	baseUrl := "https://notify.qiyutech.tech"
 	pathUrl := "/api/dd/link/{unique_id}"
-
-	if bearer != "" {
-		r.Header.Set("Authorization", "bearer "+bearer)
-	}
 
 	url, err := buildUrl(baseUrl, pathUrl, pathArgs, queryArgs)
 	if err != nil {

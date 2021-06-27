@@ -11,16 +11,12 @@ type ApiEmailNotifyUniqueId struct {
 
 // Get
 // 发送通知消息
-func (d ApiEmailNotifyUniqueId) Get(pathArgs map[string]string, queryArgs map[string]string, bearer string) (interface{}, error) {
+func (d ApiEmailNotifyUniqueId) Get(pathArgs map[string]string, queryArgs map[string]string) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "GET"
 
 	baseUrl := "https://notify.qiyutech.tech"
 	pathUrl := "/api/email/notify/{unique_id}"
-
-	if bearer != "" {
-		r.Header.Set("Authorization", "bearer "+bearer)
-	}
 
 	url, err := buildUrl(baseUrl, pathUrl, pathArgs, queryArgs)
 	if err != nil {
@@ -38,7 +34,7 @@ func (d ApiEmailNotifyUniqueId) Get(pathArgs map[string]string, queryArgs map[st
 
 // Post
 // 发送通知消息
-func (d ApiEmailNotifyUniqueId) Post(pathArgs map[string]string, body dt.NotifyArgs, bearer string) (interface{}, error) {
+func (d ApiEmailNotifyUniqueId) Post(pathArgs map[string]string, body dt.NotifyArgs) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "POST"
 
@@ -47,12 +43,9 @@ func (d ApiEmailNotifyUniqueId) Post(pathArgs map[string]string, body dt.NotifyA
 
 	queryArgs := map[string]string{}
 
-	if bearer != "" {
-		r.Header.Set("Authorization", "bearer "+bearer)
-	}
-
 	if t, err := json.Marshal(body); err == nil {
 		r.Body = io.NopCloser(bytes.NewReader(t))
+		r.Header.Set("Content-Type", "application/json")
 	} else {
 		return nil, err
 	}

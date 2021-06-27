@@ -7,7 +7,7 @@ type ApiPing struct {
 
 // Get
 // 健康检查
-func (d ApiPing) Get(bearer string) (interface{}, error) {
+func (d ApiPing) Get() (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "GET"
 
@@ -16,10 +16,6 @@ func (d ApiPing) Get(bearer string) (interface{}, error) {
 
 	pathArgs := map[string]string{}
 	queryArgs := map[string]string{}
-
-	if bearer != "" {
-		r.Header.Set("Authorization", "bearer "+bearer)
-	}
 
 	url, err := buildUrl(baseUrl, pathUrl, pathArgs, queryArgs)
 	if err != nil {

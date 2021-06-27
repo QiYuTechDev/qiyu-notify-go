@@ -18,9 +18,7 @@ func (d ApiEmailMsgList) Get(queryArgs map[string]string, bearer string) (*[]dt.
 
 	pathArgs := map[string]string{}
 
-	if bearer != "" {
-		r.Header.Set("Authorization", "bearer "+bearer)
-	}
+	r.Header.Set("Authorization", "bearer "+bearer)
 
 	url, err := buildUrl(baseUrl, pathUrl, pathArgs, queryArgs)
 	if err != nil {
@@ -32,6 +30,8 @@ func (d ApiEmailMsgList) Get(queryArgs map[string]string, bearer string) (*[]dt.
 	if err != nil {
 		return nil, err
 	}
+
+	r.Header.Set("Accept", "application/json")
 
 	ret := new([]dt.EmailMsgDt)
 
