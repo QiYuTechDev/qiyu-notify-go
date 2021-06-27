@@ -25,6 +25,12 @@ jobs:
       - name: Test
         run: go test -v ./...
 
+      - name: Build Notify
+        run: go build notify.go
+
+      - name: 显示文件
+        run: ls -alh
+
       - name: 压缩文件
         run: zip ${{ matrix.os }}.zip notify
 
