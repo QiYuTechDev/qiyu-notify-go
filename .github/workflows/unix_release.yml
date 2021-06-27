@@ -1,4 +1,4 @@
-name: Release
+name: Linux & macOS Release
 
 on: [ release ]
 
@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ macos-latest, windows-latest, ubuntu-latest ]
+        os: [ macos-latest, ubuntu-latest ]
 
     steps:
       - uses: actions/checkout@v2
@@ -29,14 +29,9 @@ jobs:
         run: go build notify.go
 
       - name: Linux & macOS 显示文件
-        if: runner.os != 'Windows'
         run: ls -alh
 
-      - name: Windows 显示文件
-        if: runner.os == 'Windows'
-        run: dir .
-
-      - name: 压缩文件
+      - name: Linux & macOS 压缩文件
         run: zip ${{ matrix.os }}.zip notify
 
       - name: 发布二进制文件

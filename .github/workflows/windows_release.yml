@@ -1,0 +1,49 @@
+name: Windows Release
+
+on: [ release ]
+
+jobs:
+
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ windows-latest ]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
+
+      - name: Build
+        run: go build -v ./...
+
+      - name: Test
+        run: go test -v ./...
+
+      - name: Build Notify
+        run: go build notify.go
+
+
+      - name: Windows 显示文件
+        run: dir .
+
+      - name: Windows 安装 zip
+        run: winget install zip
+
+      - name: Windows 压缩文件
+        run: zip ${{ matrix.os }}.zip notify.exe
+
+      - name: 发布二进制文件
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            ${{ matrix.os}}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
