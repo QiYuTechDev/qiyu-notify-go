@@ -25,11 +25,8 @@ jobs:
       - name: Windows 显示文件
         run: dir .
 
-      - name: Windows 安装 zip
-        run: winget install zip
-
       - name: Windows 压缩文件
-        run: zip ${{ matrix.os }}.zip notify.exe
+        run: 7z a -tzip ${{ matrix.os }}.zip notify.exe
 
       - name: 发布二进制文件
         uses: softprops/action-gh-release@v1
