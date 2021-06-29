@@ -11,6 +11,7 @@ type ApiTplApp struct {
 
 // Get
 // 获取自定义模版APP详情
+// queryArgs 字段有: unique_id
 func (d ApiTplApp) Get(queryArgs map[string]string, bearer string) (*dt.TplAppInfoDt, error) {
 	r := new(http.Request)
 	r.Method = "GET"
@@ -91,6 +92,7 @@ func (d ApiTplApp) Put(body dt.TplAppCreateDt, bearer string) (*dt.TplAppInfoDt,
 
 // Delete
 // 删除自定义模版推送配置
+// queryArgs 字段有: unique_id
 func (d ApiTplApp) Delete(queryArgs map[string]string, bearer string) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "DELETE"

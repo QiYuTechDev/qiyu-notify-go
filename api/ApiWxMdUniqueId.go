@@ -11,6 +11,7 @@ type ApiWxMdUniqueId struct {
 
 // Post
 // 发送 Markdown 通知消息到企业微信
+// pathArgs 字段有: unique_id
 func (d ApiWxMdUniqueId) Post(pathArgs map[string]string, body dt.NotifyArgs) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "POST"

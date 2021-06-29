@@ -9,6 +9,7 @@ type ApiDdMsgList struct {
 
 // Get
 // 获取钉钉APP最新消息列表
+// queryArgs 字段有: unique_id
 func (d ApiDdMsgList) Get(queryArgs map[string]string, bearer string) (*[]dt.DdMsgDt, error) {
 	r := new(http.Request)
 	r.Method = "GET"

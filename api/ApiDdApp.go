@@ -46,6 +46,7 @@ func (d ApiDdApp) Put(body dt.DdAppCreateDt, bearer string) (interface{}, error)
 
 // Delete
 // 删除钉钉推送配置
+// queryArgs 字段有: unique_id
 func (d ApiDdApp) Delete(queryArgs map[string]string, bearer string) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "DELETE"

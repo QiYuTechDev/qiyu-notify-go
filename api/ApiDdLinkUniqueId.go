@@ -7,6 +7,8 @@ type ApiDdLinkUniqueId struct {
 
 // Get
 // 发送通知消息
+// pathArgs 字段有: unique_id
+// queryArgs 字段有: text url
 func (d ApiDdLinkUniqueId) Get(pathArgs map[string]string, queryArgs map[string]string) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "GET"

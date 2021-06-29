@@ -7,6 +7,7 @@ type ApiDdRawUniqueId struct {
 
 // Post
 // 发送通知消息
+// pathArgs 字段有: unique_id
 func (d ApiDdRawUniqueId) Post(pathArgs map[string]string) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "POST"

@@ -55,6 +55,7 @@ func (d ApiWxApp) Put(body dt.WxAppCreateDt, bearer string) (*dt.WxAppInfoDt, er
 
 // Delete
 // 删除企业微信配置
+// queryArgs 字段有: unique_id
 func (d ApiWxApp) Delete(queryArgs map[string]string, bearer string) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "DELETE"

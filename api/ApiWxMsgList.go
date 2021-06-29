@@ -9,6 +9,7 @@ type ApiWxMsgList struct {
 
 // Get
 // 企业微信消息列表
+// queryArgs 字段有: unique_id
 func (d ApiWxMsgList) Get(queryArgs map[string]string, bearer string) (*[]dt.WxMsgDt, error) {
 	r := new(http.Request)
 	r.Method = "GET"

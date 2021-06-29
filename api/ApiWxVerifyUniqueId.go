@@ -7,6 +7,8 @@ type ApiWxVerifyUniqueId struct {
 
 // Get
 // 企业微信验证
+// pathArgs 字段有: unique_id
+// queryArgs 字段有: timestamp msg_signature nonce echostr
 func (d ApiWxVerifyUniqueId) Get(pathArgs map[string]string, queryArgs map[string]string) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "GET"

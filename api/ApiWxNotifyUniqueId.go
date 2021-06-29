@@ -11,6 +11,8 @@ type ApiWxNotifyUniqueId struct {
 
 // Get
 // 发送通知消息
+// pathArgs 字段有: unique_id
+// queryArgs 字段有: text
 func (d ApiWxNotifyUniqueId) Get(pathArgs map[string]string, queryArgs map[string]string) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "GET"
@@ -34,6 +36,7 @@ func (d ApiWxNotifyUniqueId) Get(pathArgs map[string]string, queryArgs map[strin
 
 // Post
 // 发送通知消息
+// pathArgs 字段有: unique_id
 func (d ApiWxNotifyUniqueId) Post(pathArgs map[string]string, body dt.NotifyArgs) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "POST"

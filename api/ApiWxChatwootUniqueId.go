@@ -11,6 +11,7 @@ type ApiWxChatwootUniqueId struct {
 
 // Post
 // 企业微信 Chatwoot WebHook 回调
+// pathArgs 字段有: unique_id
 func (d ApiWxChatwootUniqueId) Post(pathArgs map[string]string, body dt.ChatwootWebHookDt) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "POST"

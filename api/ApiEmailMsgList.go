@@ -9,6 +9,7 @@ type ApiEmailMsgList struct {
 
 // Get
 // 获取电子邮箱的邮件信息
+// queryArgs 字段有: unique_id
 func (d ApiEmailMsgList) Get(queryArgs map[string]string, bearer string) (*[]dt.EmailMsgDt, error) {
 	r := new(http.Request)
 	r.Method = "GET"

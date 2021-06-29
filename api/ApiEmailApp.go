@@ -7,6 +7,7 @@ type ApiEmailApp struct {
 
 // Put
 // 添加电子邮箱
+// queryArgs 字段有: email
 func (d ApiEmailApp) Put(queryArgs map[string]string, bearer string) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "PUT"
@@ -34,6 +35,7 @@ func (d ApiEmailApp) Put(queryArgs map[string]string, bearer string) (interface{
 
 // Delete
 // 删除电子邮箱推送配置
+// queryArgs 字段有: unique_id
 func (d ApiEmailApp) Delete(queryArgs map[string]string, bearer string) (interface{}, error) {
 	r := new(http.Request)
 	r.Method = "DELETE"
